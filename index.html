@@ -13,6 +13,7 @@
 
     <style>
         html {
+            background-color: #BEA58B;
             background-image: url('https://github.com/yumobennyyang/idiocracy-responsive/blob/a982ab0927916161d76e0a06d76392f22d24819f/idiocracyhospital.png?raw=true');
             background-size: auto 840px;
             background-repeat: no-repeat;
@@ -58,6 +59,16 @@
             text-shadow: 0 5px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
             filter: blur(1px);
             white-space: nowrap;
+        }
+
+        #bar{
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #BEA58B;
+            box-shadow: -6px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         #right-bar {
@@ -144,6 +155,7 @@
 
 <body>
     <div id="right-bar"></div>
+    <div id="bar"></div>
     <div id="st-god">✚ ST․ GOD′S</div>
     <div id="container">
         <div class="letter">M</div>
