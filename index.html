@@ -18,10 +18,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: 0 0;
-
-
         }
-
 
         body {
             position: fixed;
@@ -31,8 +28,6 @@
             height: 100%;
             align-items: center;
             justify-content: center;
-
-
         }
 
         #container {
@@ -52,8 +47,6 @@
             transform-origin: center center;
             text-shadow: 0 6px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
             filter: blur(1px);
-            /*
-            /* Adjust space between letters */
         }
 
         #st-god {
@@ -64,6 +57,7 @@
             height: 90px;
             text-shadow: 0 5px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
             filter: blur(1px);
+            white-space: nowrap;
         }
 
         #right-bar {
@@ -75,33 +69,24 @@
             background-color: #BEA58B;
             border-left: #654F39 1px solid;
             box-shadow: -6px 0px 10px rgba(0, 0, 0, 0.1);
-            filter: blur(1px)
+            filter: blur(1px);
         }
     </style>
 
     <script>
 
         function adjustLetterTransforms() {
+
             const letters = document.querySelectorAll('.letter');
 
-            const textWidth = Array.from(letters).reduce((acc, letter) => acc + letter.offsetWidth, 0);
-
-            // Store the initial positions of the letters to calculate movement in X
-            if (!window.letterPositions) {
-                window.letterPositions = Array.from(letters).map(letter => letter.offsetLeft);
-            }
-
-
             letters.forEach((letter, index) => {
+
                 const rightEdgeLetter = letter.offsetLeft + 60;
                 const distanceToEdge = window.innerWidth - rightEdgeLetter - 20;
-                const initialPosition = window.letterPositions[index];
                 const shift = 30;
 
                 if (distanceToEdge <= 20 && distanceToEdge >= 0) {
 
-
-                    //console.log('position:', window.letterPositions[index], 'window:', window.innerWidth, )
                     const rotationDegree = 1.5 * (20 - distanceToEdge);
                     const downShift = shift * (rotationDegree / 30) * Math.cos(rotationDegree * Math.PI / 180);
                     const rightShift = shift * (rotationDegree / 30) * Math.sin(rotationDegree * Math.PI / 180);
@@ -109,24 +94,32 @@
                     letter.style.transform = `rotate(${rotationDegree}deg) translate(${rightShift}px, ${downShift}px)`;
 
                 } else if (distanceToEdge < 0) {
-                    const rotationDegree = Math.max(36, 1.5 * (20 - Math.abs(distanceToEdge)));
+
+                    if (distanceToEdge >= 0) {
+                        rotationDegree = 30;
+                    } else if (distanceToEdge < -20) {
+                        rotationDegree = 40;
+                    } else {
+                        rotationDegree = 30 + (40 - 30) * ((distanceToEdge - 0) / (-20 - 0));
+                    }
+
                     const leftShift = Math.abs(distanceToEdge) * Math.cos(rotationDegree * Math.PI / 180);
-                    const downShift = ((shift - distanceToEdge) * Math.sin(rotationDegree * Math.PI / 180));
+                    const downShift = shift + (Math.abs(distanceToEdge)) * Math.sin(rotationDegree * Math.PI / 180);
                     const rightShift = (shift + 1.5 * Math.abs(distanceToEdge)) * Math.sin(rotationDegree * Math.PI / 180);
-                    const horizontalShift = -leftShift + rightShift;
                     const downShift2 = 1.5 * Math.abs(distanceToEdge) * Math.cos(rotationDegree * Math.PI / 180);
 
-                    letter.style.transform = `rotate(${rotationDegree}deg) translate(${horizontalShift}px, ${downShift + downShift2}px)`;
+                    letter.style.transform = `rotate(${rotationDegree}deg) translate(${-leftShift + rightShift}px, ${downShift + downShift2}px)`;
+
                 } else {
+
                     letter.style.transform = 'none';
+
                 }
             });
         }
 
         window.onresize = adjustLetterTransforms;
         window.onload = adjustLetterTransforms;
-
-
 
     </script>
 </head>
