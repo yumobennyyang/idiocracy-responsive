@@ -88,14 +88,20 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 1);
             padding: 3px 11px;
             border-radius: 100px;
+            transition: transform 0.2s;
+            opacity:0.5;
+            color: rgba(255, 255, 255, 1);
         }
 
-        #me a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
+        #me:hover{
+            opacity: 1;
+        }
+
+        #me:active{
+            transform: scale(0.95);
         }
 
         #pulsing-textbox {
@@ -217,8 +223,8 @@
         <div class="letter">A</div>
         <div class="letter">L</div>
     </div>
-    <div id="me">
-        <a href="https://twitter.com/bennyyyang">@bennyyyang</a>
+    <div id="me" href="https://twitter.com/bennyyyang">
+        <a>@bennyyyang</a>
     </div>
 </body>
 
