@@ -99,32 +99,6 @@
             text-decoration: none;
         }
 
-        #pulsing-textbox {
-            z-index: 99999;
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  font-family: "Smooch Sans", sans-serif;
-  font-size: 24px;
-  color: #C9B97C;
-  text-shadow: 0 5px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
-  filter: blur(1px);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: translateX(0) translateY(-50%);
-  }
-  50% {
-  transform: translateX(-20px) translateY(-50%);
-}
-  100% {
-    transform: translateX(0) translateY(-50%);
-  }
-}
-
     </style>
 
     <script>
@@ -179,7 +153,6 @@
 </head>
 
 <body>
-    <div id="pulsing-textbox">Try dragging the window</div>
     <div id="right-bar"></div>
     <div id="bar"></div>
     <div id="st-god">✚ ST․ GOD′S</div>
