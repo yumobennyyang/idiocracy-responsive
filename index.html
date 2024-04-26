@@ -61,7 +61,7 @@
             white-space: nowrap;
         }
 
-        #bar{
+        #bar {
             position: fixed;
             top: 0;
             right: 0;
@@ -84,21 +84,50 @@
 
         #me {
             font-family: sans-serif;
-            font-size: 16px;
+            font-size: 12px;
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 3px 11px;
             border-radius: 100px;
         }
 
-        #me a{
-            font-family: "Smooch Sans";
+        #me a {
             color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
         }
 
+        #pulsing-textbox {
+            z-index: -1;
+            position: fixed;
+            left: auto;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(180deg);
+            font-family: serif;
+            font-size: 20px;
+            color: #000;
+            animation: pulse 4s infinite;
+            white-space: nowrap;
+            overflow: visible;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translateX(0) translateY(-50%) rotate(180deg);
+            }
+
+            30% {
+                transform: translateX(-20px) translateY(-50%) rotate(180deg);
+            }
+
+            100% {
+                transform: translateX(0) translateY(-50%) rotate(180deg);
+            }
+        }
     </style>
 
     <script>
@@ -149,10 +178,23 @@
         window.onresize = adjustLetterTransforms;
         window.onload = adjustLetterTransforms;
 
+        window.addEventListener('load', function () {
+            var rightCenterDiv = document.getElementById('pulsing-textbox');
+            const xPosition = window.innerWidth - rightCenterDiv.offsetWidth - 20;
+
+            window.addEventListener('resize', function () {
+
+                rightCenterDiv.style.opacity = '0';
+                rightCenterDiv.style.left = xPosition + 'px';
+                rightCenterDiv.style.right = 'auto';
+            });
+        });
+
     </script>
 </head>
 
 <body>
+    <div id="pulsing-textbox">uᴉ ʍopuᴉʍ ǝɥʇ ƃuᴉƃƃɐɹp ʎɹʇ ⟹</div>
     <div id="right-bar"></div>
     <div id="bar"></div>
     <div id="st-god">✚ ST․ GOD′S</div>
@@ -176,7 +218,7 @@
         <div class="letter">L</div>
     </div>
     <div id="me">
-        <a href="https://twitter.com/bennyyyang">@BENNYYYANG</a>
+        <a href="https://twitter.com/bennyyyang">@bennyyyang</a>
     </div>
 </body>
 
