@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Text Color</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            background-image: url('https://github.com/yumobennyyang/idiocracy-responsive/blob/a982ab0927916161d76e0a06d76392f22d24819f/idiocracyhospital.png?raw=true');
+            background-size: auto 840px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 0 0;
+
+
+        }
+
+
+        body {
+            position: fixed;
+            padding-top: 120px;
+            padding-left: 20px;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+
+        #container {
+            display: flex;
+            align-items: left;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .letter {
+            font-family: "Smooch Sans";
+            font-size: 110px;
+            color: #C9B97C;
+            padding-right: 2px;
+            transition: transform 0.1s;
+            transform-origin: center center;
+            text-shadow: 0 6px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
+            filter: blur(1px);
+            /*
+            /* Adjust space between letters */
+        }
+
+        #st-god {
+            font-family: "Smooch Sans";
+            font-size: 96px;
+            color: #C9B97C;
+            letter-spacing: 1.8px;
+            height: 90px;
+            text-shadow: 0 5px 0px rgba(0, 0, 0, 1), 0 1px 12px rgba(0, 0, 0, 1), 0 1px 12px #654F39;
+            filter: blur(1px);
+        }
+
+        #right-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background-color: #BEA58B;
+            border-left: #654F39 1px solid;
+            box-shadow: -6px 0px 10px rgba(0, 0, 0, 0.1);
+            filter: blur(1px)
+        }
+    </style>
+
+    <script>
+
+        function adjustLetterTransforms() {
+            const letters = document.querySelectorAll('.letter');
+
+            const textWidth = Array.from(letters).reduce((acc, letter) => acc + letter.offsetWidth, 0);
+
+            // Store the initial positions of the letters to calculate movement in X
+            if (!window.letterPositions) {
+                window.letterPositions = Array.from(letters).map(letter => letter.offsetLeft);
+            }
+
+
+            letters.forEach((letter, index) => {
+                const rightEdgeLetter = letter.offsetLeft + 60;
+                const distanceToEdge = window.innerWidth - rightEdgeLetter - 20;
+                const initialPosition = window.letterPositions[index];
+                const shift = 30;
+
+                if (distanceToEdge <= 20 && distanceToEdge >= 0) {
+
+
+                    //console.log('position:', window.letterPositions[index], 'window:', window.innerWidth, )
+                    const rotationDegree = 1.5 * (20 - distanceToEdge);
+                    const downShift = shift * (rotationDegree / 30) * Math.cos(rotationDegree * Math.PI / 180);
+                    const rightShift = shift * (rotationDegree / 30) * Math.sin(rotationDegree * Math.PI / 180);
+
+                    letter.style.transform = `rotate(${rotationDegree}deg) translate(${rightShift}px, ${downShift}px)`;
+
+                } else if (distanceToEdge < 0) {
+                    const rotationDegree = Math.max(36, 1.5 * (20 - Math.abs(distanceToEdge)));
+                    const leftShift = Math.abs(distanceToEdge) * Math.cos(rotationDegree * Math.PI / 180);
+                    const downShift = ((shift - distanceToEdge) * Math.sin(rotationDegree * Math.PI / 180));
+                    const rightShift = (shift + 1.5 * Math.abs(distanceToEdge)) * Math.sin(rotationDegree * Math.PI / 180);
+                    const horizontalShift = -leftShift + rightShift;
+                    const downShift2 = 1.5 * Math.abs(distanceToEdge) * Math.cos(rotationDegree * Math.PI / 180);
+
+                    letter.style.transform = `rotate(${rotationDegree}deg) translate(${horizontalShift}px, ${downShift + downShift2}px)`;
+                } else {
+                    letter.style.transform = 'none';
+                }
+            });
+        }
+
+        window.onresize = adjustLetterTransforms;
+        window.onload = adjustLetterTransforms;
+
+
+
+    </script>
+</head>
+
+<body>
+    <div id="right-bar"></div>
+    <div id="st-god">✚ ST․ GOD′S</div>
+    <div id="container">
+        <div class="letter">M</div>
+        <div class="letter">E</div>
+        <div class="letter">M</div>
+        <div class="letter">O</div>
+        <div class="letter">R</div>
+        <div class="letter">I</div>
+        <div class="letter">A</div>
+        <div class="letter">L</div>
+        <div class="letter">&nbsp</div>
+        <div class="letter">H</div>
+        <div class="letter">O</div>
+        <div class="letter">S</div>
+        <div class="letter">P</div>
+        <div class="letter">I</div>
+        <div class="letter">T</div>
+        <div class="letter">A</div>
+        <div class="letter">L</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
