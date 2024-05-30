@@ -131,10 +131,9 @@
             right: 20px;
             top: auto;
             bottom: 10px;
-            transform: translateY(-50%) rotate(180deg);
             font-size: 20px;
             color: #ffffff;
-            animation: pulse 4s infinite;
+            animation: pulse2 4s infinite;
             overflow: visible;
             opacity: 1;
             transition: opacity 0.5s;
@@ -146,6 +145,20 @@
             }
 
             30% {
+                transform: translateX(-20px) translateY(-50%) rotate(180deg);
+            }
+
+            100% {
+                transform: translateX(0) translateY(-50%) rotate(180deg);
+            }
+        }
+
+                @keyframes pulse2 {
+            0% {
+                transform: translateX(0) translateY(-50%) rotate(180deg);
+            }
+
+            70% {
                 transform: translateX(-20px) translateY(-50%) rotate(180deg);
             }
 
