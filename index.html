@@ -124,6 +124,22 @@
             display: none;
         }
 
+                #pulsing-arrow {
+            z-index: -1;
+            position: fixed;
+            left: auto;
+            right: 20px;
+            top: auto;
+            bottom: 10px;
+            transform: translateY(-50%) rotate(180deg);
+            font-size: 20px;
+            color: #ffffff;
+            animation: pulse 4s infinite;
+            overflow: visible;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
         @keyframes pulse {
             0% {
                 transform: translateX(0) translateY(-50%) rotate(180deg);
@@ -204,6 +220,7 @@
 
 <body>
     <div id="pulsing-textbox">uᴉ ʍopuᴉʍ ǝɥʇ ƃuᴉƃƃɐɹp ʎɹʇ ⟹</div>
+    <div id="pulsing-arrow">⬅</div>
     <div id="right-bar"></div>
     <div id="bar"></div>
     <div id="st-god">✚ ST․ GOD′S</div>
